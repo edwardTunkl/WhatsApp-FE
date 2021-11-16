@@ -1,22 +1,32 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Row, Col } from "react-bootstrap";
-import User from "./Components/User";
-import Chat from "./Components/Chat"
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router,Route, Switch } from "react-router-dom";
+
+import Main from "./Components/Main";
+import Login from "./Components/Login";
+import Register from "./Components/Register";
 
 function App() {
   return (
-    
-      <Row>
-        <Col md={4}>
-          <User />
-        </Col>
-        <Col md={8}>
-          <Chat /> 
-        </Col>
-      </Row>
-    
+    <>
+      <Router>
+        <Switch>
+        {/* <Route path="/login" component={Login}/> */}
+        {/* <Route path="/register" component={Register}/> */}
+        <Route path="/" exact component={Main} />
+        <Route
+            render={() => (
+              <>
+                <br />
+                <h1 className="text-danger text-center m-5 p-5">
+                  404 - NOT FOUND
+                </h1>
+              </>
+            )}
+          />
+        </Switch>
+      </Router>
+    </>
   );
 }
 
