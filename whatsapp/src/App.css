@@ -36,3 +36,32 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 0, 0, 0),
+    rgb(119, 156, 126)
+  );
+  margin-top: 25px;
+}
+#root > div > div.col-md-4 > div > div > div:nth-child(n) {
+}
+
+#root > div > div.col-md-4 > div {
+  border-radius: 25px;
+}
+#body {
+  height: 400px;
+  background-color: aliceblue;
+  border-radius: 50px;
+  margin-top: 25px;
+  margin-right: 25px;
+}
+
+#root > div > div.col-md-4 > div {
+  border-radius: 50px;
+}
+#exampleForm\.ControlTextarea1 {
+  border-radius: 30px;
+}

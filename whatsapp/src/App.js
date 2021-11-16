@@ -7,16 +7,16 @@ import Chat from "./Components/Chat"
 
 function App() {
   return (
-    <div className="container">
+    
       <Row>
         <Col md={4}>
           <User />
         </Col>
         <Col md={8}>
-          {/* <Chat /> */}
+          <Chat /> 
         </Col>
       </Row>
-    </div>
+    
   );
 }
 

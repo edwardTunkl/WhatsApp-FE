@@ -1,10 +1,10 @@
 import React from "react";
-import "../user.css";
-import { ListGroup, Image } from "react-bootstrap";
+
+import { ListGroup, Image, Container } from "react-bootstrap";
 
 export default function User() {
   return (
-    <div>
+    <Container className="listUsers">
       <ListGroup variant="flush">
         <ListGroup.Item>
           <Image src="holder.js/50x50" roundedCircle />
@@ -23,6 +23,6 @@ export default function User() {
           NAME 4
         </ListGroup.Item>
       </ListGroup>
-    </div>
+    </Container>
   );
 }
