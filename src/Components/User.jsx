@@ -4,25 +4,25 @@ import { ListGroup, Image, Container } from "react-bootstrap";
 
 export default function User() {
   return (
-    <Container className="listUsers">
+    <>
       <ListGroup variant="flush">
-        <ListGroup.Item>
-          <Image src="holder.js/50x50" roundedCircle />
+        <ListGroup.Item className="pl-3">
+          <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTXeetJy_lQByO02YIoUMv5EEh53T812OWaw&usqp=CAU" roundedCircle />
           NAME 1
         </ListGroup.Item>
         <ListGroup.Item>
-          <Image src="holder.js/50x50" roundedCircle />
+          <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTXeetJy_lQByO02YIoUMv5EEh53T812OWaw&usqp=CAU" roundedCircle />
           NAME 2
         </ListGroup.Item>
         <ListGroup.Item>
-          <Image src="holder.js/50x50" roundedCircle />
+          <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTXeetJy_lQByO02YIoUMv5EEh53T812OWaw&usqp=CAU" roundedCircle />
           NAME 3
         </ListGroup.Item>
         <ListGroup.Item>
-          <Image src="holder.js/50x50" roundedCircle />
+          <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTXeetJy_lQByO02YIoUMv5EEh53T812OWaw&usqp=CAU" roundedCircle />
           NAME 4
         </ListGroup.Item>
       </ListGroup>
-    </Container>
+    </>
   );
 }
