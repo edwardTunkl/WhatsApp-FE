@@ -5,8 +5,8 @@ const userReducer = (state = initialState.user, action) => {
   switch (action.type) {
     case SET_USER_INFO: {
       return {
-       state = action.payload
-      }
+        ...action.payload
+      };
     }
     default:
       return state;

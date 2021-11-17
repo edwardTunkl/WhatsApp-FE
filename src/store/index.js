@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import userReducer from "../reducers/userReducer";
 import socketReducer from "../reducers/socketReducer";
+import chatReducer from "../reducers/chatReducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -10,21 +11,21 @@ export const initialState = {
     userName: "",
     _id: "",
     email: "",
-    avatar: "",
+    avatar: ""
   },
-
+  chat: {
+    active: "",
+    history: []
+  },
   socketIO: {
-    socketID: "",
-  },
+    socketID: ""
+  }
 };
 
-// chat: {
-//   active: "",
-//   history: [],
-// },
 const bigReducer = combineReducers({
   user: userReducer,
   socketIO: socketReducer,
+  chat: chatReducer
 });
 
 // 2)
