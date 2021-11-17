@@ -16,18 +16,6 @@ export default function Main() {
     dispatch(setHistoryChat());
     dispatch(setUserInfo());
     dispatch(setInitSocket());
-    setTimeout(() => {
-      socket.emit("outgoing-msg", {
-        requestTargetId: "6193875b075a2b1374ef76bc",
-        message: {
-          sender: "6193875b075a2b1374ef76bc",
-          content: {
-            text: "test message pls work",
-            media: "testString"
-          }
-        }
-      });
-    }, 10000);
   }, []);
 
   return (
