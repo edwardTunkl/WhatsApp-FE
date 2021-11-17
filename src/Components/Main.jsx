@@ -2,10 +2,18 @@ import React from "react";
 import User from "./User";
 import Chat from "./Chat";
 import { Row, Col } from "react-bootstrap";
-import NavbarRight from "./NavbarRight.jsx"
-
+import NavbarRight from "./NavbarRight.jsx";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { setInitSocket } from "..actions/socket.js";
 
 export default function Main() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setInitSocket());
+  }, []);
+
   return (
     <>
       <Row>
