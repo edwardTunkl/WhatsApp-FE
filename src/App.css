@@ -28,6 +28,8 @@ body {
 
 #root > div > div.col-md-8 > div > div:nth-child(1) {
   height: 450px;
+
+  overflow-y: scroll;
 }
 #addPic {
   font-size: 27px;
@@ -47,4 +49,17 @@ body {
 #addPic > button > svg {
   color: black;
   font-size: 30px;
+}
+#smallsearch {
+  width: fit-content;
+  display: inline-block;
+  width: 90%;
+  border-radius: 15px;
+}
+#userNav {
+  display: inline-block;
+}
+
+#userIcons {
+  display: inline-block;
 }
