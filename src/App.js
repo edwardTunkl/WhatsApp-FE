@@ -1,6 +1,6 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router,Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Main from "./Components/Main";
 import Login from "./Components/Login";
@@ -11,10 +11,10 @@ function App() {
     <>
       <Router>
         <Routes>
-        {/* <Route path="/login" component={Login}/> */}
-        {/* <Route path="/register" component={Register}/> */}
-        <Route path="/" exact element={<Main/>} />
-        <Route
+          <Route path="/login" exact element={<Login />} />
+          {/* <Route path="/register" component={Register}/> */}
+          <Route path="/" exact element={<Main />} />
+          <Route
             render={() => (
               <>
                 <br />
