@@ -22,14 +22,15 @@ export default function User() {
     const newHistory = chatHistory.map((chat) =>
       chat.members.filter((member) => member !== UserId)
     );
-
-    setUserList(newHistory);
+    setUserList(...newHistory);
   }
 
   const [userList, setUserList] = useState([]);
 
   useEffect(() => {
-    mapingHistoryUsers();
+    if (UserId && chatHistory) {
+      mapingHistoryUsers();
+    }
   }, [UserId, chatHistory]);
 
   return (

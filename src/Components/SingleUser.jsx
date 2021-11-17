@@ -3,19 +3,21 @@ import { shallowEqual, useSelector } from "react-redux";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-export const SingleUser = (user) => {
+export const SingleUser = (props) => {
   const [userData, setuserData] = useState({});
-  const fetchUser = async (userId) => {
-    let req = await axios.get(
-      process.env.REACT_APP_BE_URL + "/users/user/" + userId
-    );
+  const fetchUser = async (userid) => {
+    const url = process.env.REACT_APP_BE_URL + "/users/user/" + userid;
+
+    let req = await axios.get(url);
 
     setuserData(req.data);
   };
 
   useEffect(() => {
-    fetchUser(user);
-  }, [user]);
+    if (props.userData) {
+      fetchUser(props.userData);
+    }
+  }, [props.userData]);
   return (
     <>
       <ListGroup.Item>
