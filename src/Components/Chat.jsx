@@ -10,6 +10,7 @@ import {
   Card,
   Modal,
   Button,
+ Navbar
 } from "react-bootstrap";
 
 export default function Chat() {
@@ -19,6 +20,12 @@ export default function Chat() {
   
 
   return (
+
+
+    <>
+
+
+
     <Container className="ChatBody">
       <Row>
         <Col id="historyChat">
@@ -92,5 +99,6 @@ export default function Chat() {
         </Col>
       </Row>
     </Container>
+    </>
   );
 }
