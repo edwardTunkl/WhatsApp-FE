@@ -1,12 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { ListGroup, Image, Form } from "react-bootstrap";
+import { ListGroup, Image, Form, Button } from "react-bootstrap";
 import { Row, Col, Navbar } from "react-bootstrap";
 import { FaRegLifeRing } from "react-icons/fa";
 import { BsFillChatLeftTextFill, BsThreeDotsVertical } from "react-icons/bs";
 import { BiSearch } from "react-icons/bi";
+import { shallowEqual, useSelector } from "react-redux";
+import axios from "axios";
+import { SingleUser } from "./SingleUser";
+
+// later
 
 export default function User() {
+  //we need to grab a history
+  //we need to take all the members array , filter out those array and then
+  //fetch all the users one by one and
+  const chatHistory = useSelector((state) => state.chat.history);
+  const UserId = useSelector((state) => state.user._id);
+
+  function mapingHistoryUsers() {
+    const newHistory = chatHistory.map((chat) =>
+      chat.members.filter((member) => member !== UserId)
+    );
+
+    setUserList(newHistory);
+  }
+
+  const [userList, setUserList] = useState([]);
+
+  useEffect(() => {
+    mapingHistoryUsers();
+  }, [UserId, chatHistory]);
+
   return (
     <>
       <ListGroup variant="flush">
@@ -21,8 +46,6 @@ export default function User() {
               id="userNav"
             />{" "}
             USER
-          
-            
           </Col>
         </ListGroup.Item>
 
@@ -35,34 +58,10 @@ export default function User() {
             id="smallsearch"
           />
         </ListGroup.Item>
-        <ListGroup.Item>
-          <Image
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTXeetJy_lQByO02YIoUMv5EEh53T812OWaw&usqp=CAU"
-            roundedCircle
-          />
-          NAME 1
-        </ListGroup.Item>
-        <ListGroup.Item>
-          <Image
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTXeetJy_lQByO02YIoUMv5EEh53T812OWaw&usqp=CAU"
-            roundedCircle
-          />
-          NAME 2
-        </ListGroup.Item>
-        <ListGroup.Item>
-          <Image
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTXeetJy_lQByO02YIoUMv5EEh53T812OWaw&usqp=CAU"
-            roundedCircle
-          />
-          NAME 3
-        </ListGroup.Item>
-        <ListGroup.Item>
-          <Image
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTXeetJy_lQByO02YIoUMv5EEh53T812OWaw&usqp=CAU"
-            roundedCircle
-          />
-          NAME 4
-        </ListGroup.Item>
+
+        {userList &&
+          userList.length > 0 &&
+          userList.map((user) => <SingleUser key={user} userData={user} />)}
       </ListGroup>
     </>
   );
