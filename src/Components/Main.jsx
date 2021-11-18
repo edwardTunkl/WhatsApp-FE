@@ -22,10 +22,10 @@ export default function Main() {
   return (
     <div id="container">
       <Row>
-        <Col md={4}>
+        <Col md={4} className="px-0">
           <User />
         </Col>
-        <Col md={8}>
+        <Col md={8} className="px-0">
           <NavbarRight />
           <Chat />
         </Col>
