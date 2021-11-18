@@ -1,7 +1,7 @@
 import { INCOMING_MESSAGE } from "./socket";
 
 export const SET_USER_INFO = "SET_USER_INFO";
-export const SET_ACTIVE_CHAT = "SET_ACTIVE_CHAT";
+export const SET_ACTIVE_USER = "SET_ACTIVE_USER";
 export const SET_HISTORY_CHAT = "SET_HISTORY_CHAT";
 export const SET_HISTORY_CHAT_BY_ID = "SET_HISTORY_CHAT_BY_ID";
 export const SET_MESSAGE_ON_SOCKET = "SET_MESSAGE_ON_SOCKET";
@@ -34,9 +34,9 @@ export const setUserInfo = (name) => {
   };
 };
 
-export const setActiveChat = (chatId) => ({
-  type: SET_ACTIVE_CHAT,
-  payload: chatId,
+export const setActiveUser = (userId) => ({
+  type: SET_ACTIVE_USER,
+  payload: userId,
 });
 
 export const setMessageOnSocket = (chat) => ({

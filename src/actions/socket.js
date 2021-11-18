@@ -18,11 +18,7 @@ export const setInitSocket = () => {
     socket.on("join", (roomId) => {
       console.log(roomId);
     });
-    socket.on("incoming-msg", (chatId) => {
-      console.log("this");
-      console.log(chatId);
-      dispatch(setHistoryChatById(chatId));
-    });
+
     dispatch({ type: SET_INIT_SOCKET, payload: "socketID" });
   };
 };

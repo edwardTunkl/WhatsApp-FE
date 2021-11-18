@@ -1,0 +1,7 @@
+#container {
+  margin-left: 5rem;
+  margin-right: 5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  z-index: 10;
+}

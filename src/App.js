@@ -11,7 +11,7 @@ import ProtectedRoute from "./Components/Auth";
 function App() {
   // const user = useSelector((state) => state.user);
   return (
-    <>
+    <div id="body">
       <Router>
         <Routes>
           <Route path="/login" exact element={<Login />} />
@@ -22,7 +22,7 @@ function App() {
           </Route> */}
         </Routes>
       </Router>
-    </>
+    </div>
   );
 }
 

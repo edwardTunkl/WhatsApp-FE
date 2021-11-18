@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { setInitSocket } from "../actions/socket.js";
 import { setHistoryChat, setUserInfo } from "../actions";
 import { socket } from "../actions/socket.js";
+import "../main.css";
 
 export default function Main() {
   const dispatch = useDispatch();
@@ -16,22 +17,10 @@ export default function Main() {
     dispatch(setHistoryChat());
     dispatch(setUserInfo());
     dispatch(setInitSocket());
-    setTimeout(() => {
-      socket.emit("outgoing-msg", {
-        requestTargetId: "6193875b075a2b1374ef76bc",
-        message: {
-          sender: "6193875b075a2b1374ef76bc",
-          content: {
-            text: "test message pls work",
-            media: "testString"
-          }
-        }
-      });
-    }, 10000);
   }, []);
 
   return (
-    <>
+    <div id="container">
       <Row>
         <Col md={4}>
           <User />
@@ -41,6 +30,6 @@ export default function Main() {
           <Chat />
         </Col>
       </Row>
-    </>
+    </div>
   );
 }

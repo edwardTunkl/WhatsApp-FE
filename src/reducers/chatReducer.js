@@ -1,4 +1,4 @@
-import { SET_HISTORY_CHAT } from "../actions";
+import { SET_ACTIVE_USER, SET_HISTORY_CHAT } from "../actions";
 import { INCOMING_MESSAGE } from "../actions/socket";
 import { initialState } from "../store";
 
@@ -7,7 +7,7 @@ const chatReducer = (state = initialState.chat, action) => {
     case SET_HISTORY_CHAT: {
       return {
         ...state,
-        history: action.payload
+        history: action.payload,
       };
     }
     case INCOMING_MESSAGE: {
@@ -22,10 +22,15 @@ const chatReducer = (state = initialState.chat, action) => {
 
       return {
         ...state,
-        history: insertIntoHistory()
+        history: insertIntoHistory(),
       };
     }
-
+    case SET_ACTIVE_USER: {
+      return {
+        ...state,
+        active: action.payload,
+      };
+    }
     default:
       return state;
   }

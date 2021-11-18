@@ -1,0 +1,13 @@
+#bg {
+  background-image: url(https://cdn.wallpapersafari.com/27/32/jt4AoG.jpg);
+  overflow-y: scroll;
+  position: relative;
+}
+#layer {
+  background-color: rgba(222, 214, 206, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
