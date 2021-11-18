@@ -16,7 +16,11 @@ function App() {
         <Routes>
           <Route path="/login" exact element={<Login />} />
           <Route path="/register" exact element={<Register />} />
-          <Route path="/" exact element={<ProtectedRoute />} />
+          <Route
+            path="/"
+            exact
+            element={<ProtectedRoute elementToRender={<Main />} />}
+          />
           {/* <ProtectedRoute path="/" exact element={<Main />} /> */}
           {/* <Route exact path="/">
             {user ? (element = <Main />) : <Navigate to="/login" />}
