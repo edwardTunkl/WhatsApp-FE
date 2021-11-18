@@ -1,56 +1,50 @@
-import { set } from "date-fns/esm";
 import React from "react";
 import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import Main from "./Main";
 
-function ProtectedRoute() {
+function ProtectedRoute({ elementToRender }) {
   const [isAuthenticated, setAuthenticated] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem("token"));
   const [fetchingUser, setFetchingUser] = useState(true);
-  const [userInfo, setUserInfo] = useState(false);
+
+  const abort = new AbortController();
 
   useEffect(() => {
-    if (token) {
-      const auth = async () => {
-        try {
-          let req = await fetch(process.env.REACT_APP_BE_URL + "/users/me", {
-            method: "GET",
-            headers: { Authorization: localStorage.getItem("token") },
-          });
-          if (req.ok) {
-            let userInfo = await req.json();
-            if (userInfo) {
-              setAuthenticated(true);
-            } else {
-            }
-          } else {
-            throw new Error(req.statusText);
+    const auth = async () => {
+      try {
+        let req = await fetch(process.env.REACT_APP_BE_URL + "/users/me", {
+          signal: abort.signal,
+          method: "GET",
+          headers: { Authorization: localStorage.getItem("token") }
+        });
+
+        if (req.ok) {
+          let data = await req.json();
+          if (data) {
+            setAuthenticated(true);
+            setFetchingUser(false);
           }
-        } catch (error) {
-          console.log(error);
+        } else {
+          setFetchingUser(false);
         }
-      };
-      auth();
-      console.log(isAuthenticated);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    auth();
+  }, []);
+
+  useEffect(() => {
+    if (!fetchingUser)
       return () => {
-        setFetchingUser(false);
-        console.log("look here");
+        abort.abort();
       };
-    }
-  }, [token]);
-
-  // check if a user is auth,if(auth) wait for every code to run, then redirect
-
-  console.log(isAuthenticated);
+  });
 
   return (
     <>
-      {isAuthenticated && fetchingUser === false ? (
-        <Main />
-      ) : (
-        <Navigate to="/login" />
-      )}
+      {isAuthenticated && elementToRender}
+      {!fetchingUser && !isAuthenticated && <Navigate to="/login" />}
     </>
   );
 }
