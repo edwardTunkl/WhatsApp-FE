@@ -16,7 +16,7 @@ export const setUserInfo = (name) => {
     try {
       let req = await fetch(process.env.REACT_APP_BE_URL + "/users/me", {
         method: "GET",
-        headers: { Authorization: process.env.REACT_APP_TOKEN },
+        headers: { Authorization: localStorage.getItem("token") },
       });
       if (req.ok) {
         let userInfo = await req.json();
@@ -49,7 +49,7 @@ export const setHistoryChat = () => {
     try {
       let req = await fetch(process.env.REACT_APP_BE_URL + "/chats", {
         method: "GET",
-        headers: { Authorization: process.env.REACT_APP_TOKEN },
+        headers: { Authorization: localStorage.getItem("token") },
       });
       if (req.ok) {
         let chatInfo = await req.json();
@@ -71,7 +71,7 @@ export const setHistoryChatById = (chatId) => {
     try {
       let req = await fetch(process.env.REACT_APP_BE_URL + "/chats/" + chatId, {
         method: "GET",
-        headers: { Authorization: process.env.REACT_APP_TOKEN },
+        headers: { Authorization: localStorage.getItem("token") },
       });
       if (req.ok) {
         let chatData = await req.json();
