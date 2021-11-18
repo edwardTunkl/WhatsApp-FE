@@ -12,7 +12,12 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" exact element={<Login />} />
-          {/* <Route path="/register" component={Register}/> */}
+          <Route path="/register" exact element={<Register />} />
+          {/* <Route
+            path="/register"
+            exact
+            render={(routerProps) => <Register {...routerProps} />}
+          /> */}
           <Route path="/" exact element={<Main />} />
           <Route
             render={() => (

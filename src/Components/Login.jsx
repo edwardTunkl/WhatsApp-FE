@@ -3,24 +3,22 @@ import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserInfo } from "../actions";
 import { useState } from "react";
+import "../login.css";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
-export default function Login({ history }) {
+export default function Login() {
+  const navigate = useNavigate();
   const [logIn, setLogIn] = useState({
     email: "",
     password: "",
   });
+  console.log(logIn);
 
-  // const user = useSelector((state) => state.user);
+  const User = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const handleOnChange = (e, key) => {
-    setLogIn({
-      ...logIn,
-      [key]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async ({ e, logIn }) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       let response = await fetch("http://localhost:3001/users/session", {
@@ -28,15 +26,18 @@ export default function Login({ history }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(logIn),
       });
+      console.log(logIn);
       if (response.ok) {
         let data = await response.json();
-        localStorage.setItem("token", data.newAccessToken);
-        let user = await findUserFromToken(data.newAccessToken);
+        console.log("data", data);
+        localStorage.setItem("token", data);
+        let user = await findUserFromToken(data);
+
         if (user) {
           dispatch(setUserInfo(user));
         }
         setTimeout(function () {
-          history.push("/");
+          navigate("/");
         }, 3000);
       }
     } catch (err) {
@@ -49,10 +50,11 @@ export default function Login({ history }) {
       let response = await fetch("http://localhost:3001/users/me", {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `${token}`,
         },
       });
       let data = await response.json();
+      console.log("data-->", data);
       let user = data;
       return user;
     } catch (err) {
@@ -61,34 +63,44 @@ export default function Login({ history }) {
   };
 
   return (
-    <div>
-      <div>
-        <h1>LOGIN</h1>
-        <Form onSubmit={handleSubmit}>
+    <div className="loggin-cont">
+      <div className="content-loggin-cont">
+        <h1 className="loggin-header py-4">LOGIN</h1>
+        <Form
+          onSubmit={(e) => {
+            handleSubmit(e);
+          }}
+        >
           <Form.Control
             type="text"
             placeholder="Email"
-            className="my-3"
+            className="email-input my-3"
             value={logIn.email}
-            onChange={(e) => handleOnChange(e, "email")}
+            // onChange={(e) => handleOnChange(e, "email")}
+            onChange={(e) => setLogIn({ ...logIn, email: e.target.value })}
           />
           <Form.Control
             type="password"
             placeholder="Password"
-            className="my-3"
+            className="password-input my-3"
             value={logIn.password}
-            onChange={(e) => handleOnChange(e, "password")}
+            // onChange={(e) => handleOnChange(e, "password")}
+            onChange={(e) => setLogIn({ ...logIn, password: e.target.value })}
           />
-          <Form.Check type="checkbox" label="Remember me" className="my-3" />
-          <Button type="submit" className="my-2">
+          <Form.Check
+            type="checkbox"
+            label="Remember me"
+            className="check-input my-3"
+          />
+          <Button type="submit" className="log-in-btn my-2">
             LOGIN
           </Button>
         </Form>
-        <p className="py-4 m-0">
+        <p className="className='not-a-member-p p-5 m-0">
           Not a member?{" "}
-          {/* <Link to="/register" className="link-register">
+          <Link to="/register" className="link-register">
             Sign up now!
-          </Link> */}
+          </Link>
         </p>
       </div>
     </div>
