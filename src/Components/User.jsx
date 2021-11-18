@@ -62,7 +62,7 @@ export default function User() {
 
         {userList &&
           userList.length > 0 &&
-          userList.map((user) => <SingleUser key={user} userData={user} />)}
+          userList.map((user) => <SingleUser key={user} userID={user} />)}
       </ListGroup>
     </div>
   );

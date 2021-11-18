@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlinePicture } from "react-icons/ai";
 import { ImCross } from "react-icons/im";
 import { GrEmoji } from "react-icons/gr";
@@ -13,51 +13,65 @@ import {
   Button,
   Navbar,
 } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import Message from "./Message";
+import SendText from "./SendText";
+import { socket } from "../actions/socket";
+import { useDispatch } from "react-redux";
+import { setHistoryChatById } from "../actions";
+// TO-Dos:
+// extract the active user
 
 export default function Chat() {
   const [show, setShow] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [chatID, setChatID] = useState("");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const dispatch = useDispatch();
+
+  const activeUser = useSelector((state) => state.chat.active);
+
+  socket.on("incoming-msg", async (incomingChatId) => {
+    if (incomingChatId === chatID) {
+      let req = await axios.get(
+        process.env.REACT_APP_BE_URL + "/chats/activeChat/" + activeUser,
+        {
+          headers: { Authorization: process.env.REACT_APP_TOKEN },
+        }
+      );
+      setMessages(req.data[0].history);
+    }
+    dispatch(setHistoryChatById(incomingChatId));
+  });
+
+  useEffect(async () => {
+    if (activeUser) {
+      let req = await axios.get(
+        process.env.REACT_APP_BE_URL + "/chats/activeChat/" + activeUser,
+        {
+          headers: { Authorization: process.env.REACT_APP_TOKEN },
+        }
+      );
+      setChatID(req.data[0]._id);
+      setMessages(req.data[0].history);
+    }
+  }, [activeUser]);
 
   return (
     <div id="bg" className="vh-100">
       <Container className="ChatBody">
+        {messages &&
+          messages.length > 0 &&
+          messages.map((m) => <Message message={m} key={m._id} />)}
+
         <Row>
-          <Col id="historyChat">
-            <Col md={5} className="my-2">
-              <Card className="my-1">
-                <Card.Body>
-                  <Card.Text>Some text message </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={7} className="my-2">
-              <Card className="my-1">
-                <Card.Body>
-                  <Card.Text>Some another message </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={9} className="my-2">
-              <Card className="my-1">
-                <Card.Body>
-                  <Card.Text>Some text message </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Col>
+          <SendText />
         </Row>
         <Row>
           <Col md={12}>
-            <Form>
-              <Form.Group controlId="exampleForm.ControlTextarea1">
-                <Form.Control
-                  as="textarea"
-                  placeholder="Send a message"
-                  rows={2}
-                />
-              </Form.Group>
-            </Form>
             <Col md={12} id="addPic">
               <Button onClick={handleShow}>
                 Add + <AiOutlinePicture />

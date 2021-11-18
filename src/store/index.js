@@ -6,26 +6,32 @@ import chatReducer from "../reducers/chatReducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+// in chat/history we have the chat rooms
+// each room has array of two users
+// filter out oursellf
+// -> list of people we have chat to
+// -> list of our chats
+
 export const initialState = {
   user: {
     userName: "",
     _id: "",
     email: "",
-    avatar: ""
+    avatar: "",
   },
   chat: {
     active: "",
-    history: []
+    history: [],
   },
   socketIO: {
-    socketID: ""
-  }
+    socketID: "",
+  },
 };
 
 const bigReducer = combineReducers({
   user: userReducer,
   socketIO: socketReducer,
-  chat: chatReducer
+  chat: chatReducer,
 });
 
 // 2)
