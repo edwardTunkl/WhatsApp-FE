@@ -49,6 +49,8 @@ export const setHistoryChat = () => {
     try {
       let req = await fetch(process.env.REACT_APP_BE_URL + "/chats", {
         method: "GET",
+
+        //headers:{ Authorization: process.env.REACT_APP_TOKEN }
         headers: { Authorization: localStorage.getItem("token") },
       });
       if (req.ok) {

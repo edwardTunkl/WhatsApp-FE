@@ -4,10 +4,11 @@ import { ListGroup, Image, Form, Button } from "react-bootstrap";
 import { Row, Col, Navbar } from "react-bootstrap";
 import { FaRegLifeRing } from "react-icons/fa";
 import { BsFillChatLeftTextFill, BsThreeDotsVertical } from "react-icons/bs";
-import { BiSearch } from "react-icons/bi";
+
 import { shallowEqual, useSelector } from "react-redux";
 import axios from "axios";
 import { SingleUser } from "./SingleUser";
+import SearchUser from "./SearchUser";
 
 // later
 
@@ -49,17 +50,7 @@ export default function User() {
             USER
           </Col>
         </ListGroup.Item>
-
-        <ListGroup.Item>
-          <BiSearch />
-          <Form.Control
-            size="sm"
-            type="text"
-            placeholder="Search people "
-            id="smallsearch"
-          />
-        </ListGroup.Item>
-
+        <SearchUser />
         {userList &&
           userList.length > 0 &&
           userList.map((user) => <SingleUser key={user} userID={user} />)}
