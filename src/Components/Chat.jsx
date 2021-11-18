@@ -26,6 +26,9 @@ import { setHistoryChatById } from "../actions";
 export default function Chat() {
   const [show, setShow] = useState(false);
   const [messages, setMessages] = useState([]);
+
+  console.log("MESSAGES", messages);
+
   const [chatID, setChatID] = useState("");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -62,47 +65,49 @@ export default function Chat() {
 
   return (
     <div id="bg" className="vh-100">
-      <Container className="ChatBody">
-        {messages &&
-          messages.length > 0 &&
-          messages.map((m) => <Message message={m} key={m._id} />)}
+      <div id="layer">
+        <Container className="ChatBody">
+          {messages &&
+            messages.length > 0 &&
+            messages.map((m) => <Message message={m} key={m._id} />)}
 
-        <Row>
-          <SendText />
-        </Row>
-        <Row>
-          <Col md={12}>
-            <Col md={12} id="addPic">
-              <Button onClick={handleShow}>
-                Add + <AiOutlinePicture />
-              </Button>
+          <Row>
+            <SendText />
+          </Row>
+          <Row>
+            <Col md={12}>
+              <Col md={12} id="addPic">
+                <Button onClick={handleShow}>
+                  Add + <AiOutlinePicture />
+                </Button>
 
-              <Modal
-                show={show}
-                onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
-              >
-                <Modal.Header>
-                  <Modal.Title>Add picture</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>...</Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
-                    <ImCross />
-                  </Button>
-                </Modal.Footer>
-              </Modal>
+                <Modal
+                  show={show}
+                  onHide={handleClose}
+                  backdrop="static"
+                  keyboard={false}
+                >
+                  <Modal.Header>
+                    <Modal.Title>Add picture</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>...</Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                      <ImCross />
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
 
-              <Button
-              //onClick={handleShow}
-              >
-                Add + <GrEmoji />
-              </Button>
+                <Button
+                //onClick={handleShow}
+                >
+                  Add + <GrEmoji />
+                </Button>
+              </Col>
             </Col>
-          </Col>
-        </Row>
-      </Container>
+          </Row>
+        </Container>
+      </div>
     </div>
   );
 }

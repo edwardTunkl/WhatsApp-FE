@@ -1,6 +1,7 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { format, parseISO } from "date-fns";
 import "../message.css";
 
 export default function Message({ message }) {
@@ -10,9 +11,18 @@ export default function Message({ message }) {
   return (
     <div>
       {isMyMessage ? (
-        <div className="myMessage"> {message.content.text} </div>
+        <div className="myMessage">
+          <div> {message.content.text} </div>
+          <div className="date">
+            {" "}
+            {format(parseISO(message.createdAt), "p")}
+          </div>
+        </div>
       ) : (
-        <div className="notMyMessage">{message.content.text}</div>
+        <div className="notMyMessage">
+          <div>{message.content.text}</div>
+          <div className="date">{format(parseISO(message.createdAt), "p")}</div>
+        </div>
       )}
     </div>
   );
