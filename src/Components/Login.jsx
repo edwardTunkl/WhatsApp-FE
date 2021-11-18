@@ -15,7 +15,7 @@ export default function Login() {
   });
   console.log(logIn);
 
-  const User = useSelector((state) => state.user);
+  // const User = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
@@ -26,19 +26,20 @@ export default function Login() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(logIn),
       });
-      console.log(logIn);
       if (response.ok) {
         let data = await response.json();
         console.log("data", data);
-        localStorage.setItem("token", data);
-        let user = await findUserFromToken(data);
-
+        localStorage.setItem("token", data.accessToken);
+        console.log(localStorage.getItem("token"));
+        let user = await findUserFromToken(data.accessToken);
         if (user) {
           dispatch(setUserInfo(user));
         }
         setTimeout(function () {
           navigate("/");
         }, 3000);
+      } else {
+        console.log("Something went wrong...");
       }
     } catch (err) {
       console.log(err);

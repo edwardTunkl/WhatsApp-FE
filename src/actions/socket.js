@@ -6,7 +6,7 @@ export const INCOMING_MESSAGE = "INCOMING_MESSAGE";
 
 export const socket = io(process.env.REACT_APP_SOCKET_ADDRESS, {
   transports: ["websocket"],
-  auth: { "Access-Token": process.env.REACT_APP_TOKEN }
+  auth: { "Access-Token": localStorage.getItem("token") },
 });
 
 export const setInitSocket = () => {
