@@ -8,6 +8,7 @@ import {
   Button,
   Navbar,
 } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 export default function NavbarRight() {
   return (
@@ -20,7 +21,7 @@ export default function NavbarRight() {
           height="30"
           className="d-inline-block align-top"
         />{" "}
-        Room Name{" "}
+        OTHER USER{" "}
       </Navbar.Brand>
     </Navbar>
   );
