@@ -1,5 +1,4 @@
 import React from "react";
-
 import { ListGroup, Image, Form } from "react-bootstrap";
 import { Row, Col, Navbar } from "react-bootstrap";
 import { FaRegLifeRing } from "react-icons/fa";
@@ -8,7 +7,7 @@ import { BiSearch } from "react-icons/bi";
 
 export default function User() {
   return (
-    <>
+    <div>
       <ListGroup variant="flush">
         <ListGroup.Item>
           <Col>
@@ -21,8 +20,6 @@ export default function User() {
               id="userNav"
             />{" "}
             USER
-          
-            
           </Col>
         </ListGroup.Item>
 
@@ -64,6 +61,6 @@ export default function User() {
           NAME 4
         </ListGroup.Item>
       </ListGroup>
-    </>
+    </div>
   );
 }

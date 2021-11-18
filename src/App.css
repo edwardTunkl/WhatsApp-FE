@@ -1,5 +1,6 @@
-body {
-  background-image: url(https://cdn.wallpapersafari.com/27/32/jt4AoG.jpg);
+#body {
+  background: linear-gradient(#009688 10%, #dadbd4 10%);
+  position: relative;
 }
 
 #exampleForm\.ControlTextarea1 {
@@ -56,6 +57,7 @@ body {
   width: 90%;
   border-radius: 15px;
 }
+
 #userNav {
   display: inline-block;
 }

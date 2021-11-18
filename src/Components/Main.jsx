@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { setInitSocket } from "../actions/socket.js";
 import { setHistoryChat, setUserInfo } from "../actions";
 import { socket } from "../actions/socket.js";
+import "../main.css";
 
 export default function Main() {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ export default function Main() {
   }, []);
 
   return (
-    <>
+    <div id="container">
       <Row>
         <Col md={4}>
           <User />
@@ -29,6 +30,6 @@ export default function Main() {
           <Chat />
         </Col>
       </Row>
-    </>
+    </div>
   );
 }
