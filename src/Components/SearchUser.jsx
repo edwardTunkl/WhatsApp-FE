@@ -3,6 +3,8 @@ import axios from "axios";
 import { Form, ListGroup } from "react-bootstrap";
 import { BiSearch } from "react-icons/bi";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import DisplaySearchedUser from "./DisplaySearchedUser";
 
 const SearchUser = () => {
   const [queryUser, setQueryUser] = useState("");
@@ -15,9 +17,12 @@ const SearchUser = () => {
         process.env.REACT_APP_BE_URL +
         `/users?username=${queryUser}&email=${queryUser}`;
       const req = await axios.get(url);
-      console.log(req, "sdsjdsjid");
+      console.log(req.data[0].username, "heyy there");
       if (req.status == 200) {
         setSearchedUsers(req.data);
+
+        setQueryUser("");
+        console.log(req.data, "eshdshsihdisudiusd");
       }
     } catch (error) {}
   };
@@ -39,17 +44,14 @@ const SearchUser = () => {
           />
         </Form>
       </ListGroup.Item>
+
+      {searchedUsers &&
+        // searchedUsers > 0 &&
+        searchedUsers.map((user) => (
+          <DisplaySearchedUser key={user._id} user={user} />
+        ))}
     </div>
   );
 };
-
-{
-  /* <FormControl
-          placeholder="Send a message"
-          value={messageText}
-          onChange={(e) => setMessageText(e.target.value)}
-        />
-      </Form> */
-}
 
 export default SearchUser;

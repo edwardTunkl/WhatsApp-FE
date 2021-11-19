@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { setActiveUser } from "../actions";
 import "../singleUser.css";
+import DisplaySearchedUser from "./DisplaySearchedUser.jsx";
 
 //To-Dos:
 // new dispatch to set active user
@@ -19,6 +20,7 @@ export const SingleUser = (props) => {
     let req = await axios.get(url);
 
     setuserData(req.data);
+    console.log(req.data[0].username, "teeeestowski");
   };
 
   useEffect(() => {
