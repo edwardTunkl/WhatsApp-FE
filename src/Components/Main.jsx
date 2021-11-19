@@ -3,6 +3,7 @@ import User from "./User";
 import Chat from "./Chat";
 import { Row, Col } from "react-bootstrap";
 import NavbarRight from "./NavbarRight.jsx";
+import SendText from "./SendText.jsx";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setInitSocket } from "../actions/socket.js";
@@ -28,6 +29,7 @@ export default function Main() {
         <Col md={8} className="px-0">
           <NavbarRight />
           <Chat />
+          <SendText />
         </Col>
       </Row>
     </div>

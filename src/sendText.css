@@ -1,0 +1,14 @@
+.bottomBar {
+  width: 100%;
+  background-color: #f0f0f0;
+  height: 4rem;
+}
+.icon {
+  font-size: 1.5rem;
+  color: #818689;
+  justify-content: center;
+}
+.form {
+  border-radius: 45px;
+  width: 90%;
+}
