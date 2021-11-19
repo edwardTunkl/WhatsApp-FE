@@ -32,10 +32,15 @@ export default function Chat() {
   const [chatID, setChatID] = useState("");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const dispatch = useDispatch();
-
   const activeUser = useSelector((state) => state.chat.active);
+  const myId = useSelector((state) => state.user._id);
+  const dispatch = useDispatch();
+  const playSound = () => {
+    const url =
+      "http://commondatastorage.googleapis.com/codeskulptor-assets/week7-bounce.m4a";
+    const audio = new Audio(url);
+    audio.play();
+  };
 
   socket.on("incoming-msg", async (incomingChatId) => {
     if (incomingChatId === chatID) {
@@ -46,6 +51,9 @@ export default function Chat() {
         }
       );
       setMessages(req.data[0].history);
+      if (req.data[0].history[-1].sender != myId) {
+        playSound();
+      }
     }
     dispatch(setHistoryChatById(incomingChatId));
   });
