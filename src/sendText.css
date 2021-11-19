@@ -1,0 +1,17 @@
+.bottomBar {
+  width: 100%;
+  background-color: #f0f0f0;
+  height: 5rem;
+}
+.icon {
+  font-size: 1.5rem;
+  color: #818689;
+  margin-left: 1rem;
+}
+.form-div {
+  width: 90%;
+}
+.form {
+  border-radius: 20%;
+  width: 100%;
+}
