@@ -11,14 +11,14 @@ import {
   Card,
   Modal,
   Button,
-  Navbar,
+  Navbar
 } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Message from "./Message";
 import { socket } from "../actions/socket";
 import { useDispatch } from "react-redux";
-import { setHistoryChatById } from "../actions";
+import { setHistoryChat, setHistoryChatById } from "../actions";
 // TO-Dos:
 // extract the active user
 
@@ -33,41 +33,48 @@ export default function Chat() {
   const handleShow = () => setShow(true);
   const activeUser = useSelector((state) => state.chat.active);
   const myId = useSelector((state) => state.user._id);
+  const history = useSelector((state) => state.chat.history);
   const dispatch = useDispatch();
-  const playSound = () => {
-    const url =
-      "http://commondatastorage.googleapis.com/codeskulptor-assets/week7-bounce.m4a";
-    const audio = new Audio(url);
-    audio.play();
-  };
+  // const playSound = () => {
+  //   const url =
+  //     "http://commondatastorage.googleapis.com/codeskulptor-assets/week7-bounce.m4a";
+  //   const audio = new Audio(url);
+  //   audio.play();
+  // };
 
-  socket.on("incoming-msg", async (incomingChatId) => {
-    if (incomingChatId === chatID) {
-      let req = await axios.get(
-        process.env.REACT_APP_BE_URL + "/chats/activeChat/" + activeUser,
-        {
-          headers: { Authorization: process.env.REACT_APP_TOKEN },
-        }
-      );
-      setMessages(req.data[0].history);
-      if (req.data[0].history[-1].sender != myId) {
-        playSound();
+  //   // if (req.data[0].history[-1].sender != myId) {
+  //   //   playSound();
+  //   // }
+  // });
+  useEffect(() => {
+    socket.removeListener("incoming-msg");
+    socket.once("incoming-msg", async (incomingChatId) => {
+      dispatch(setHistoryChat());
+      console.log("trigger");
+      socket.emit("makeJoin", incomingChatId);
+      if (activeUser) {
+        fetchMsg();
       }
-    }
-
-    dispatch(setHistoryChatById(incomingChatId));
+    });
+    return () => {};
   });
+
+  const fetchMsg = async () => {
+    let req = await axios.get(
+      process.env.REACT_APP_BE_URL + "/chats/activeChat/" + activeUser,
+      {
+        headers: { Authorization: localStorage.getItem("token") }
+      }
+    );
+    if (req.data[0]) {
+      setChatID(req.data[0]._id);
+      setMessages(req.data[0].history);
+    }
+  };
 
   useEffect(async () => {
     if (activeUser) {
-      let req = await axios.get(
-        process.env.REACT_APP_BE_URL + "/chats/activeChat/" + activeUser,
-        {
-          headers: { Authorization: process.env.REACT_APP_TOKEN },
-        }
-      );
-      setChatID(req.data[0]._id);
-      setMessages(req.data[0].history);
+      fetchMsg();
     }
   }, [activeUser]);
 

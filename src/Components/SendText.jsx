@@ -1,31 +1,43 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, FormControl } from "react-bootstrap";
 import { socket } from "../actions/socket";
 import "../sendText.css";
 import { AiOutlinePaperClip } from "react-icons/ai";
 import { FaMicrophone } from "react-icons/fa";
 import { CgSmileMouthOpen } from "react-icons/cg";
+import { setHistoryChat } from "../actions";
 
 export default function SendText() {
   const activeUser = useSelector((state) => state.chat.active);
   const myID = useSelector((state) => state.user._id);
-
+  const dispatch = useDispatch();
   const [messageText, setMessageText] = useState("");
 
   const sendMessage = (e) => {
     e.preventDefault();
-
+    // console.log("sending msg");
+    // console.log({
+    //   requestTargetId: activeUser,
+    //   message: {
+    //     sender: myID,
+    //     content: {
+    //       text: messageText,
+    //       media: "String"
+    //     }
+    //   }
+    // });
     socket.emit("outgoing-msg", {
       requestTargetId: activeUser,
       message: {
         sender: myID,
         content: {
           text: messageText,
-          media: "String",
-        },
-      },
+          media: "String"
+        }
+      }
     });
+    dispatch(setHistoryChat());
 
     setMessageText("");
   };

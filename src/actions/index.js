@@ -16,14 +16,14 @@ export const setUserInfo = (name) => {
     try {
       let req = await fetch(process.env.REACT_APP_BE_URL + "/users/me", {
         method: "GET",
-        headers: { Authorization: localStorage.getItem("token") },
+        headers: { Authorization: localStorage.getItem("token") }
       });
       if (req.ok) {
         let userInfo = await req.json();
         console.log(userInfo);
         dispatch({
           type: SET_USER_INFO,
-          payload: userInfo,
+          payload: userInfo
         });
       } else {
         throw new Error(req.statusText);
@@ -36,12 +36,12 @@ export const setUserInfo = (name) => {
 
 export const setActiveUser = (userId) => ({
   type: SET_ACTIVE_USER,
-  payload: userId,
+  payload: userId
 });
 
 export const setMessageOnSocket = (chat) => ({
   type: SET_MESSAGE_ON_SOCKET,
-  payload: chat,
+  payload: chat
 });
 
 export const setHistoryChat = () => {
@@ -50,14 +50,13 @@ export const setHistoryChat = () => {
       let req = await fetch(process.env.REACT_APP_BE_URL + "/chats", {
         method: "GET",
 
-        //headers:{ Authorization: process.env.REACT_APP_TOKEN }
-        headers: { Authorization: localStorage.getItem("token") },
+        headers: { Authorization: localStorage.getItem("token") }
       });
       if (req.ok) {
         let chatInfo = await req.json();
         dispatch({
           type: SET_HISTORY_CHAT,
-          payload: chatInfo,
+          payload: chatInfo
         });
       } else {
         throw new Error(req.statusText);
@@ -73,13 +72,13 @@ export const setHistoryChatById = (chatId) => {
     try {
       let req = await fetch(process.env.REACT_APP_BE_URL + "/chats/" + chatId, {
         method: "GET",
-        headers: { Authorization: localStorage.getItem("token") },
+        headers: { Authorization: localStorage.getItem("token") }
       });
       if (req.ok) {
         let chatData = await req.json();
         dispatch({
           type: INCOMING_MESSAGE,
-          payload: chatData,
+          payload: chatData
         });
       } else {
         throw new Error(req.statusText);

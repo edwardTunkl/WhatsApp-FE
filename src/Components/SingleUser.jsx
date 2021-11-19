@@ -13,14 +13,13 @@ export const SingleUser = (props) => {
   const dispatch = useDispatch();
 
   const [userData, setuserData] = useState({});
-  console.log("USERDATA", userData);
+
   const fetchUser = async (userid) => {
     const url = process.env.REACT_APP_BE_URL + "/users/user/" + userid;
 
     let req = await axios.get(url);
 
     setuserData(req.data);
-    console.log(req.data[0].username, "teeeestowski");
   };
 
   useEffect(() => {
