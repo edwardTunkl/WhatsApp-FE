@@ -46,6 +46,7 @@ export default function Chat() {
       );
       setMessages(req.data[0].history);
     }
+
     dispatch(setHistoryChatById(incomingChatId));
   });
 
@@ -69,40 +70,6 @@ export default function Chat() {
           {messages &&
             messages.length > 0 &&
             messages.map((m) => <Message message={m} key={m._id} />)}
-
-          <Row></Row>
-          <Row>
-            <Col md={12}>
-              <Col md={12} id="addPic">
-                <Button onClick={handleShow}>
-                  Add + <AiOutlinePicture />
-                </Button>
-
-                <Modal
-                  show={show}
-                  onHide={handleClose}
-                  backdrop="static"
-                  keyboard={false}
-                >
-                  <Modal.Header>
-                    <Modal.Title>Add picture</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>...</Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                      <ImCross />
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
-
-                <Button
-                //onClick={handleShow}
-                >
-                  Add + <GrEmoji />
-                </Button>
-              </Col>
-            </Col>
-          </Row>
         </Container>
       </div>
     </div>
