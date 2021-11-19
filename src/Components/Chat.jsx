@@ -16,7 +16,6 @@ import {
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Message from "./Message";
-import SendText from "./SendText";
 import { socket } from "../actions/socket";
 import { useDispatch } from "react-redux";
 import { setHistoryChatById } from "../actions";
@@ -71,9 +70,7 @@ export default function Chat() {
             messages.length > 0 &&
             messages.map((m) => <Message message={m} key={m._id} />)}
 
-          <Row>
-            <SendText />
-          </Row>
+          <Row></Row>
           <Row>
             <Col md={12}>
               <Col md={12} id="addPic">
